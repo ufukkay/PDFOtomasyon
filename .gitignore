@@ -1,0 +1,24 @@
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+/Release/
+/Payload/
+/Source/Payload/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.opensdf
+*.sdf
+
+# Logs and Data
+Logs/
+PDF_Out/
+
+# Temporary files
+*.tmp
+*.log
+Thumbs.db
+*.zip
+*.exe

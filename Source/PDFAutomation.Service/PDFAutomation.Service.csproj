@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>PDFAutomation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.0" />
+    <PackageReference Include="MailKit" Version="4.14.1" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.82.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <!-- Link existing source files from WPF project -->
+  <ItemGroup>
+    <Compile Include="..\PDFAutomation\Models\AppConfig.cs" Link="Models\AppConfig.cs" />
+    <Compile Include="..\PDFAutomation\Models\EmailMessage.cs" Link="Models\EmailMessage.cs" />
+    <Compile Include="..\PDFAutomation\Models\LogEntry.cs" Link="Models\LogEntry.cs" />
+    <Compile Include="..\PDFAutomation\Models\RetryMetadata.cs" Link="Models\RetryMetadata.cs" />
+    <Compile Include="..\PDFAutomation\Services\ConfigurationManager.cs" Link="Services\ConfigurationManager.cs" />
+    <Compile Include="..\PDFAutomation\Services\EmailService.cs" Link="Services\EmailService.cs" />
+    <Compile Include="..\PDFAutomation\Services\FileWatcherService.cs" Link="Services\FileWatcherService.cs" />
+    <Compile Include="..\PDFAutomation\Services\LoggingService.cs" Link="Services\LoggingService.cs" />
+    <Compile Include="..\PDFAutomation\Services\RetryService.cs" Link="Services\RetryService.cs" />
+  </ItemGroup>
+
+</Project>

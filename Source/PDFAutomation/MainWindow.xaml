@@ -1,0 +1,522 @@
+﻿<Window x:Class="PDFAutomation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        Title="PDF Otomasyon Sistemi" Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        Background="#F3F4F6">
+    <Window.Resources>
+        <!-- Renk Paleti -->
+        <SolidColorBrush x:Key="PrimaryColor" Color="#2563EB"/>     <!-- Royal Blue -->
+        <SolidColorBrush x:Key="PrimaryDarkColor" Color="#1E40AF"/> <!-- Dark Blue -->
+        <SolidColorBrush x:Key="SuccessColor" Color="#10B981"/>     <!-- Emerald Green -->
+        <SolidColorBrush x:Key="WarningColor" Color="#F59E0B"/>     <!-- Amber -->
+        <SolidColorBrush x:Key="ErrorColor" Color="#EF4444"/>       <!-- Red -->
+        <SolidColorBrush x:Key="BackgroundColor" Color="#F3F4F6"/>  <!-- Light Gray -->
+        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF"/>   <!-- White -->
+        <SolidColorBrush x:Key="TextColor" Color="#1F2937"/>        <!-- Gray 800 -->
+        <SolidColorBrush x:Key="SubTextColor" Color="#6B7280"/>     <!-- Gray 500 -->
+        <SolidColorBrush x:Key="BorderColor" Color="#E5E7EB"/>      <!-- Gray 200 -->
+
+        <!-- Stiller -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Effect="{DynamicResource CardShadow}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Background="#F9FAFB" CornerRadius="8,8,0,0" Padding="15,10" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" 
+                                                      TextBlock.Foreground="{StaticResource TextColor}" 
+                                                      TextBlock.FontSize="14" TextBlock.FontWeight="Bold"/>
+                                </Border>
+                                <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PrimaryDarkColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#9CA3AF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="White"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="White"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource SubTextColor}"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+        </Style>
+
+        <!-- Gölge Efekti -->
+        <DropShadowEffect x:Key="CardShadow" BlurRadius="10" Color="#000000" Direction="270" Opacity="0.05" ShadowDepth="2"/>
+
+        <!-- Logo -->
+        <Viewbox x:Key="AppLogo" Width="40" Height="40">
+            <Canvas Width="24" Height="24">
+                <Path Fill="#2563EB" Data="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z M13,9V3.5L18.5,9H13z"/>
+                <Path Fill="#34D399" Data="M12,18c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,18,12,18z M12,13c-1.66,0-3,1.34-3,3s1.34,3,3,3s3-1.34,3-3S13.66,13,12,13z"/>
+                <Path Fill="#2563EB" Data="M19.43,12.98c0.04-0.32,0.07-0.64,0.07-0.98s-0.03-0.66-0.07-0.98l2.11-1.65c0.19-0.15,0.24-0.42,0.12-0.64l-2-3.46c-0.12-0.22-0.39-0.31-0.61-0.22l-2.49,1c-0.52-0.4-1.08-0.73-1.69-0.98l-0.38-2.65C14.46,3.17,14.24,3,14,3h-4c-0.24,0-0.46,0.17-0.49,0.42L9.13,6.07C8.52,6.32,7.96,6.65,7.44,7.05l-2.49-1c-0.22-0.09-0.49,0-0.61,0.22l-2,3.46c-0.12-0.22-0.07,0.49,0.12,0.64l2.11,1.65c-0.04,0.32-0.07,0.65-0.07,0.98s0.03,0.66,0.07,0.98l-2.11,1.65c-0.19,0.15-0.24,0.42-0.12,0.64l2,3.46c0.12,0.22,0.39,0.31,0.61,0.22l2.49-1c0.52,0.4,1.08,0.73,1.69,0.98l0.38,2.65C9.54,20.83,9.76,21,10,21h4c0.24,0,0.46-0.17,0.49-0.42l0.38-2.65c0.61-0.25,1.17-0.58,1.69-0.98l2.49,1c0.22,0.09,0.49,0,0.61-0.22l2-3.46c0.12-0.22,0.07-0.49-0.12-0.64L19.43,12.98z M12,15.5c-1.93,0-3.5-1.57-3.5-3.5s1.57-3.5,3.5-3.5s3.5,1.57,3.5,3.5S13.93,15.5,12,15.5z" Opacity="0.5"/>
+            </Canvas>
+        </Viewbox>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Sistem Tepsisi İkonu -->
+        <tb:TaskbarIcon x:Name="TrayIcon"
+                        ToolTipText="PDF Otomasyon Sistemi"
+                        TrayLeftMouseDown="TrayIcon_TrayLeftMouseDown">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Aç" Click="MenuOpen_Click"/>
+                    <MenuItem x:Name="MenuStartStop" Header="Durdur" Click="MenuStartStop_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Çıkış" Click="MenuExit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
+        <TabControl Margin="20" Background="Transparent" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border x:Name="Border" Padding="20,10" Margin="0,0,5,0" 
+                                        Background="Transparent" 
+                                        CornerRadius="8"
+                                        BorderThickness="0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      ContentSource="Header"
+                                                      Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource PrimaryColor}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{StaticResource SubTextColor}"/>
+                                    </Trigger>
+                                     <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                     </Trigger>
+                                     <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Style>
+            </TabControl.Resources>
+
+            <!-- Dashboard Sekmesi -->
+            <TabItem Header="📊 Dashboard">
+                <Grid Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30">
+                        <Border Background="White" Padding="10" CornerRadius="12" Effect="{StaticResource CardShadow}">
+                            <ContentControl Content="{StaticResource AppLogo}" Width="48" Height="48"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Margin="20,0,0,0">
+                            <TextBlock Text="PDF Otomasyon Sistemi" FontSize="28" FontWeight="Bold" Foreground="{StaticResource TextColor}"/>
+                            <TextBlock Text="Akıllı PDF İşleme ve Gönderim Paneli" FontSize="14" Foreground="{StaticResource SubTextColor}" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- İstatistikler -->
+                    <UniformGrid Grid.Row="1" Rows="1" Columns="4" Margin="0,0,0,25">
+                        <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20" Margin="0,0,15,0" Effect="{StaticResource CardShadow}">
+                            <StackPanel>
+                                <TextBlock Text="SİSTEM DURUMU" FontSize="12" FontWeight="Bold" Foreground="{StaticResource SubTextColor}"/>
+                                <TextBlock x:Name="TxtStatus" Text="Durduruldu" FontSize="20" FontWeight="Bold" Foreground="{StaticResource WarningColor}" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20" Margin="0,0,15,0" Effect="{StaticResource CardShadow}">
+                            <StackPanel>
+                                <TextBlock Text="BUGÜN GÖNDERİLEN" FontSize="12" FontWeight="Bold" Foreground="{StaticResource SubTextColor}"/>
+                                <TextBlock x:Name="TxtSentToday" Text="0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource SuccessColor}" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20" Margin="0,0,15,0" Effect="{StaticResource CardShadow}">
+                            <StackPanel>
+                                <TextBlock Text="BEKLEYEN" FontSize="12" FontWeight="Bold" Foreground="{StaticResource SubTextColor}"/>
+                                <TextBlock x:Name="TxtPending" Text="0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource WarningColor}" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20" Effect="{StaticResource CardShadow}">
+                            <StackPanel>
+                                <TextBlock Text="BAŞARISIZ" FontSize="12" FontWeight="Bold" Foreground="{StaticResource SubTextColor}"/>
+                                <TextBlock x:Name="TxtFailed" Text="0" FontSize="32" FontWeight="Bold" Foreground="{StaticResource ErrorColor}" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+
+                    <!-- Son İşlemler -->
+                    <Border Grid.Row="2" Background="{StaticResource CardBackground}" CornerRadius="12" Effect="{StaticResource CardShadow}" Padding="20" VerticalAlignment="Stretch">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Son İşlemler" FontSize="18" FontWeight="Bold" Foreground="{StaticResource TextColor}" Margin="0,0,0,15"/>
+                            <ListView x:Name="LstRecentLogs" Grid.Row="1" FontSize="14" BorderThickness="0" Background="Transparent" VerticalAlignment="Top" Height="300">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Zaman" Width="120" DisplayMemberBinding="{Binding Zaman, StringFormat='{}{0:HH:mm:ss}'}"/>
+                                        <GridViewColumn Header="Dosya" Width="250" DisplayMemberBinding="{Binding DosyaAdi}"/>
+                                        <GridViewColumn Header="Durum" Width="100" DisplayMemberBinding="{Binding Durum}"/>
+                                        <GridViewColumn Header="Alıcı" Width="200" DisplayMemberBinding="{Binding Alici}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Ayarlar Sekmesi -->
+            <TabItem Header="⚙️ Ayarlar">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,20,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Sol Kolon -->
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <!-- SMTP Ayarları -->
+                            <GroupBox Header="SMTP Ayarları">
+                                <StackPanel>
+                                    <Label Content="SMTP Sunucusu"/>
+                                    <TextBox x:Name="TxtSmtpServer"/>
+
+                                    <Label Content="Port"/>
+                                    <TextBox x:Name="TxtSmtpPort"/>
+
+                                    <CheckBox x:Name="ChkOAuth2" Content="OAuth2 Kullan (Microsoft 365)" Margin="0,0,0,15" Click="ChkOAuth2_Click"/>
+
+                                    <StackPanel x:Name="PnlBasicAuth">
+                                        <Label Content="Kullanıcı Adı"/>
+                                        <TextBox x:Name="TxtSmtpUsername"/>
+
+                                        <Label Content="Şifre"/>
+                                        <PasswordBox x:Name="TxtSmtpPassword"/>
+                                    </StackPanel>
+
+                                    <StackPanel x:Name="PnlOAuth2" Visibility="Collapsed">
+                                        <Label Content="Tenant ID"/>
+                                        <TextBox x:Name="TxtTenantId"/>
+
+                                        <Label Content="Client ID"/>
+                                        <TextBox x:Name="TxtClientId"/>
+
+                                        <Label Content="Client Secret"/>
+                                        <PasswordBox x:Name="TxtClientSecret"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- E-posta Ayarları -->
+                            <GroupBox Header="Gönderim Ayarları">
+                                <StackPanel>
+                                    <Label Content="Gönderen E-posta"/>
+                                    <TextBox x:Name="TxtSender"/>
+
+                                    <Label Content="Alıcı E-posta (Virgül ile ayırın)"/>
+                                    <TextBox x:Name="TxtRecipient"/>
+
+                                    <Label Content="Konu Formatı"/>
+                                    <TextBox x:Name="TxtSubjectFormat"/>
+                                    <TextBlock Text="{}{Kullanici}, {Tarih}, {DosyaAdi}" FontSize="12" Foreground="{StaticResource SubTextColor}" Margin="0,-10,0,10"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <!-- Sağ Kolon -->
+                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                            <!-- Entegrasyon -->
+                            <GroupBox Header="Entegrasyon">
+                                <StackPanel>
+                                    <TextBlock Text="Sanal yazıcı, Microsoft Print to PDF driver'ı kullanılarak oluşturulur." TextWrapping="Wrap" Margin="0,0,0,15" Foreground="{StaticResource SubTextColor}"/>
+                                    <Button Content="Sanal Yazıcıyı Kur (PDF Otomasyon)" Click="SetupPrinter_Click" Background="{StaticResource WarningColor}"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- Klasörler -->
+                            <GroupBox Header="Klasör Yolları">
+                                <StackPanel>
+                                    <Label Content="Incoming (Gelen)"/>
+                                    <TextBox x:Name="TxtIncoming"/>
+
+                                    <Label Content="Sent (Gönderilen)"/>
+                                    <TextBox x:Name="TxtSent"/>
+
+                                    <Label Content="Failed (Hatalı)"/>
+                                    <TextBox x:Name="TxtFailedPath"/>
+
+                                    <Label Content="Logs (Kayıtlar)"/>
+                                    <TextBox x:Name="TxtLogs"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- Diğer -->
+                            <GroupBox Header="Diğer Ayarlar">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                            <Label Content="Max Dosya (MB)"/>
+                                            <TextBox x:Name="TxtMaxFileSize"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                            <Label Content="Max Deneme"/>
+                                            <TextBox x:Name="TxtMaxRetry"/>
+                                            <Label Content="Deneme Aralığı (Dk)"/>
+                                            <TextBox x:Name="TxtRetryInterval"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <CheckBox x:Name="ChkCompression" Content="Dosya Sıkıştırma Etkin" Margin="0,0,0,10"/>
+                                    <CheckBox x:Name="ChkRunAtStartup" Content="Windows Başlatıldığında Çalıştır" Margin="0,5,0,0" Checked="ChkRunAtStartup_CheckedChanged" Unchecked="ChkRunAtStartup_CheckedChanged"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <!-- Footer -->
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                             <Button Content="🔄 Varsayılana Dön" Click="BtnResetSettings_Click" Background="Transparent" Foreground="{StaticResource SubTextColor}" Margin="0,0,10,0"/>
+                             <Button Content="💾 Ayarları Kaydet" Click="BtnSaveSettings_Click" Padding="30,12"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Loglar Sekmesi -->
+            <TabItem Header="📋 Loglar">
+                <Grid Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Filtreler -->
+                    <Border Grid.Row="0" Background="{StaticResource CardBackground}" CornerRadius="8" Padding="15" Margin="0,0,0,15" Effect="{StaticResource CardShadow}">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Filtrele:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold"/>
+                            <ComboBox x:Name="CmbLogFilter" Width="200" SelectedIndex="0" SelectionChanged="CmbLogFilter_SelectionChanged" Padding="5">
+                                <ComboBoxItem Content="Tümü"/>
+                                <ComboBoxItem Content="Başarılı"/>
+                                <ComboBoxItem Content="Başarısız"/>
+                                <ComboBoxItem Content="Tekrar"/>
+                            </ComboBox>
+                            <Button Content="🔄 Yenile" Click="BtnRefreshLogs_Click" Margin="15,0,0,0" Padding="15,5" FontSize="13"/>
+                            <CheckBox x:Name="ChkAutoRefresh" Content="Otomatik Yenile (5sn)" Margin="20,0,0,0" VerticalAlignment="Center" IsChecked="True" Checked="ChkAutoRefresh_Checked" Unchecked="ChkAutoRefresh_Unchecked"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Log Listesi -->
+                    <Border Grid.Row="1" Background="{StaticResource CardBackground}" CornerRadius="8" Effect="{StaticResource CardShadow}">
+                         <ListView x:Name="LstLogs" BorderThickness="0" Margin="5">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Zaman" Width="140" DisplayMemberBinding="{Binding Zaman, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"/>
+                                    <GridViewColumn Header="Dosya" Width="200" DisplayMemberBinding="{Binding DosyaAdi}"/>
+                                    <GridViewColumn Header="Durum" Width="100" DisplayMemberBinding="{Binding Durum}"/>
+                                    <GridViewColumn Header="Alıcı" Width="200" DisplayMemberBinding="{Binding Alici}"/>
+                                    <GridViewColumn Header="Deneme" Width="80" DisplayMemberBinding="{Binding DenemeSayisi}"/>
+                                    <GridViewColumn Header="Hata / Mesaj" Width="400" DisplayMemberBinding="{Binding Hata}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
+
+                    <!-- Toplam -->
+                    <TextBlock Grid.Row="2" x:Name="TxtLogCount" Text="Toplam: 0 kayıt" Margin="0,15,0,0" HorizontalAlignment="Right" Foreground="{StaticResource SubTextColor}"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Test ve Servis Sekmesi -->
+            <TabItem Header="🛠️ Araçlar">
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Sol Kolon -->
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+
+
+                        <!-- Test İşlemleri -->
+                        <GroupBox Header="Test İşlemleri" Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="Ayarların doğruluğunu test etmek için kendinize bir deneme e-postası gönderin." TextWrapping="Wrap" Margin="0,0,0,10" Foreground="{StaticResource SubTextColor}"/>
+                                <Button x:Name="BtnTestEmail" Content="📧 Test E-postası Gönder" Click="BtnTestEmail_Click" Background="{StaticResource PrimaryColor}"/>
+                                <TextBlock x:Name="TxtTestResult" Text="" Margin="0,10,0,0" FontWeight="Bold" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="Uygulama İçi Servis">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                    <Button x:Name="BtnStartStop" Content="▶️ Başlat" Click="BtnStartStop_Click" Width="150" Background="{StaticResource SuccessColor}"/>
+                                    <TextBlock x:Name="TxtServiceStatus" Text="Servis durduruldu" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
+                                </StackPanel>
+                                <TextBlock Text="Uygulama açıkken dosya izlemeyi başlatır/durdurur." TextWrapping="Wrap" Foreground="{StaticResource SubTextColor}" FontSize="12"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+
+                    <!-- Sağ Kolon -->
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                         <GroupBox Header="Windows Servis Yönetimi (Arka Plan)">
+                            <StackPanel>
+                                <TextBlock Text="Windows Servisi kurulduğunda uygulama kapalı olsa bile arka planda çalışır. Bilgisayar açılışında otomatik başlar." 
+                                          TextWrapping="Wrap" Margin="0,0,0,20" Foreground="{StaticResource SubTextColor}"/>
+                                
+                                <Border x:Name="ServiceStatusBorder" Background="#F1F5F9" Padding="15" CornerRadius="8" Margin="0,0,0,20">
+                                    <StackPanel>
+                                        <TextBlock x:Name="TxtWinServiceStatus" Text="Durum: Kontrol edilmedi" FontWeight="Bold" FontSize="16"/>
+                                        <TextBlock x:Name="TxtWinServiceDetail" Text="" Foreground="{StaticResource SubTextColor}" TextWrapping="Wrap" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/> 
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="BtnInstallService" Content="Kur" Click="BtnInstallService_Click" Background="{StaticResource PrimaryColor}" Margin="0,0,5,0"/>
+                                    <Button Grid.Column="1" x:Name="BtnUninstallService" Content="Kaldır" Click="BtnUninstallService_Click" Background="{StaticResource ErrorColor}" Margin="5,0,0,0"/>
+                                </Grid>
+                                <Button x:Name="BtnRefreshServiceStatus" Content="Durumu Yenile" Click="BtnRefreshServiceStatus_Click" Background="Transparent" Foreground="{StaticResource PrimaryColor}" BorderThickness="1" BorderBrush="{StaticResource PrimaryColor}"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

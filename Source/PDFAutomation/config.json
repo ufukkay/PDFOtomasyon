@@ -1,0 +1,35 @@
+{
+  "Klasorler": {
+    "Incoming": "C:\\PDF_Out\\Incoming",
+    "Sent": "C:\\PDF_Out\\Sent",
+    "Failed": "C:\\PDF_Out\\Failed",
+    "Logs": "C:\\PDF_Out\\Logs"
+  },
+  "Smtp": {
+    "Sunucu": "smtp.office365.com",
+    "Port": 587,
+    "OAuth2Kullan": false,
+    "TenantId": "",
+    "ClientId": "",
+    "ClientSecret": "",
+    "KullaniciAdi": "",
+    "Sifre": ""
+  },
+  "Eposta": {
+    "Gonderen": "user@example.com",
+    "Alici": "archive@example.com",
+    "KonuFormati": "PDF Çıktı - {Kullanici} - {Tarih} - {DosyaAdi}"
+  },
+  "Retry": {
+    "MaksimumDeneme": 5,
+    "AralikDakika": 10
+  },
+  "Dosya": {
+    "MaksimumBoyutMB": 35,
+    "SikistirmaEtkin": true
+  },
+  "Loglama": {
+    "Format": "json",
+    "Seviye": "Info"
+  }
+}
