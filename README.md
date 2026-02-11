@@ -10,34 +10,29 @@
 
 ## 🇬🇧 English
 
-**PDF Automation System** is a comprehensive Windows desktop application and background service designed to streamline your document workflow. It automatically monitors specific folders (or a virtual printer), processes incoming PDF files, compresses them, and emails them to designated recipients without manual intervention.
+**PDF Automation System** is a comprehensive Windows desktop application and background service designed to streamline your document workflow.
+
+### 📥 Download & Installation
+
+The installer file is too large to be included directly in the source code. Please download it from the **Releases** section.
+
+1.  👉 **[Click here to download the latest version / Son sürümü indirmek için tıklayın](https://github.com/ufukkay/PDFOtomasyon/releases)**
+2.  Find the latest release (e.g., `v1.0.0`).
+3.  Click on `PDFOtomasyon_Setup.exe` under "Assets".
+4.  **Run the installer:**
+    - Double-click `PDFOtomasyon_Setup.exe`.
+    - If Windows SmartScreen appears, click **"More Info"** -> **"Run Anyway"**.
+    - Follow the installation wizard steps.
+5.  **Finish:** The application will launch automatically. You can also find it in your Start Menu as "PDF Otomasyon Sistemi".
 
 ### 🚀 Key Features
 
 - **📂 Automated Folder Monitoring:** Instantly detects PDF files dropped into the "Incoming" directory.
 - **🖨️ Virtual Printer Integration:** Installs a "PDF Automation" printer driver. Any document printed to this printer is automatically captured, converted to PDF, and processed.
-- **📧 Advanced Email Engine:**
-  - Supports standard SMTP.
-  - **Microsoft 365 (OAuth2)** support for modern, secure authentication.
-  - Customizable subject lines and body text.
-- **⚙️ Windows Service:** Runs silently in the background (System Tray), ensuring operations continue even when the main UI is closed.
-- **📉 Smart Compression:** Optimizes large PDF files under a specified limit (e.g., 35MB) to ensure successful email delivery.
-- **🔄 Retry Mechanism:** Automatically retries failed shipments (e.g., during internet outages) at configurable intervals.
-- **📊 Dashboard & Reporting:** Visualizes daily statistics, success/failure rates, and detailed logs in real-time.
-
-### 🛠️ Installation
-
-1.  Download the latest release (`PDFOtomasyon_Setup.exe`).
-2.  Run the installer and follow the on-screen instructions.
-3.  The application will automatically launch.
-4.  Navigate to the **Settings** tab to configure your SMTP server and target email addresses.
-
-### 💻 Tech Stack
-
-- **Language:** C#
-- **Framework:** .NET 6.0 (WPF for UI, Worker Service for Background)
-- **Database:** JSON-based local storage (No SQL required).
-- **Libraries:** MailKit (Email), Serilog (Logging), PDFSharp (Processing).
+- **📧 Advanced Email Engine:** Supports SMTP and Microsoft 365 (OAuth2).
+- **⚙️ Windows Service:** Runs silently in the background (System Tray).
+- **📉 Smart Compression:** Optimizes large PDF files.
+- **📊 Dashboard & Reporting:** Visualizes daily statistics.
 
 ---
 
@@ -45,37 +40,39 @@
 
 ## 🇹🇷 Türkçe
 
-**PDF Otomasyon Sistemi**, belge iş akışınızı hızlandırmak için tasarlanmış kapsamlı bir Windows masaüstü uygulaması ve arka plan servisidir. Belirlediğiniz klasörleri (veya sanal yazıcıyı) izler, gelen PDF dosyalarını otomatik olarak işler, sıkıştırır ve belirlenen alıcılara e-posta ile gönderir.
+**PDF Otomasyon Sistemi**, belge iş akışınızı hızlandırmak için tasarlanmış kapsamlı bir Windows masaüstü uygulamasıdır.
+
+### 📥 İndirme ve Kurulum
+
+Kurulum dosyası (`.exe`), kaynak kodun içinde değil, sağ taraftaki **Releases** bölümünde yer alır.
+
+1.  👉 **[Buraya tıklayarak İndirme Sayfasına (Releases) gidin](https://github.com/ufukkay/PDFOtomasyon/releases)**
+2.  En güncel sürümü (örneğin `v1.0.0`) bulun.
+3.  "Assets" başlığı altındaki **`PDFOtomasyon_Setup.exe`** dosyasına tıklayıp indirin.
+4.  **Kurulumu Başlatın:**
+    - İndirdiğiniz `PDFOtomasyon_Setup.exe` dosyasını çalıştırın.
+    - _Not: Windows SmartScreen uyarısı çıkarsa "Ek Bilgi" -> "Yine de Çalıştır" diyerek devam edin._
+    - Kurulum sihirbazındaki "İleri" adımlarını takip edin.
+5.  **İşlem Tamam:** Kurulum bitince masaüstünüzde ve Başlat menüsünde **"PDF Otomasyon Sistemi"** ikonunu göreceksiniz.
 
 ### 🚀 Öne Çıkan Özellikler
 
-- **📂 Otomatik Klasör İzleme:** "Incoming" klasörüne düşen dosyaları anında algılar ve işleme alır.
-- **🖨️ Sanal Yazıcı Desteği:** Sisteme "PDF Otomasyon" adında bir yazıcı kurar. Word, Excel veya herhangi bir programdan bu yazıcıya çıktı gönderdiğinizde dosya otomatik olarak PDF'e çevrilir ve sisteme dahil edilir.
-- **📧 Gelişmiş E-posta Motoru:**
-  - Standart SMTP sunucuları ile uyumludur.
-  - **Microsoft 365 (OAuth2)** desteği ile modern ve güvenli kimlik doğrulama sağlar.
-- **⚙️ Windows Servisi:** Uygulama arayüzü kapalı olsa bile arka planda (System Tray) sessizce çalışmaya devam eder.
-- **📉 Akıllı Sıkıştırma:** Büyük dosyaları e-posta ek boyutuna (örn. 35MB) sığacak şekilde optimize eder.
-- **🔄 Tekrar Deneme (Retry) Mekanizması:** İnternet kesintisi gibi durumlarda gönderilemeyen dosyaları belirlenen aralıklarla tekrar dener.
-- **📊 Dashboard & Raporlama:** Günlük gönderim sayılarını, bekleyen ve hatalı işlemleri anlık grafiklerle sunar.
+- **📂 Otomatik Klasör İzleme:** Klasöre düşen dosyalar anında işlenir.
+- **🖨️ Sanal Yazıcı Desteği:** "PDF Otomasyon" yazıcısına gönderilen her çıktı PDF'e dönüştürülüp otomatik mail atılır.
+- **📧 Gelişmiş E-posta:** Gmail, Outlook, Microsoft 365 (OAuth2) tam destek.
+- **⚙️ Arka Plan Servisi:** Programı kapatsanız bile servis çalışmaya devam eder.
+- **📉 Akıllı Sıkıştırma:** Dosyaları mail boyutuna uygun hale getirir.
 
-### 🛠️ Kurulum ve Kullanım
+### 🛠️ Geliştirici Notları
 
-1.  **Release** klasöründeki veya GitHub Releases bölümündeki `PDFOtomasyon_Setup.exe` dosyasını indirin.
-2.  Kurulumu başlatın; sihirbaz gerekli dosyaları `Program Files` altına yükleyecek ve kısayolları oluşturacaktır.
-3.  Uygulamayı açın ve **Ayarlar** sekmesine gidin.
-4.  SMTP (Gönderici) bilgilerinizi ve Alıcı e-posta adreslerini girip "Kaydet" butonuna basın.
-
-### 💻 Teknik Altyapı
+Proje **.NET 6.0**, **WPF** ve **Windows Service** mimarisi üzerine kuruludur.
 
 - **Dil:** C#
-- **Altyapı:** .NET 6.0 (Arayüz için WPF, Arka plan için Windows Service)
-- **Veri Kaydı:** JSON tabanlı yerel kayıt (Veritabanı kurulumu gerektirmez).
-- **Kütüphaneler:** MailKit (E-posta), Serilog (Loglama), PDFSharp (PDF İşleme).
+- **IDE:** Visual Studio 2022
+- **Veritabanı:** JSON (Yerel)
 
 ---
 
 ### 👨‍💻 Developer / Geliştirici
 
 **Ufuk Kaya**
-_Project developed for automated document management workflows._
